@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author trant
  */
-@WebServlet(name = "ManageProduct", urlPatterns = {"/ManageProduct"})
-public class ManageProduct extends HttpServlet {
+@WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
+public class TestServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,17 +31,18 @@ public class ManageProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
+       response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         
-        HoaDAO hoaDAO = HoaDAO();
+        HoaDAO hoaDAO = new HoaDAO();
         
-        String action = "LIST";
+         String action = "LIST";
         if (request.getParameter("action") != null)
         {
             action = request.getParameter("action");
         }
-        switch (action) {
+        
+         switch (action) {
             case "LIST":
                 request.setAttribute("dsHoa", hoaDAO.getAll());
                 request.getRequestDispatcher("admin/list_product.jsp").forward(request, response);
@@ -58,9 +59,6 @@ public class ManageProduct extends HttpServlet {
                 System.out.println("DELETE");
                 break;
         }
-
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -101,9 +99,5 @@ public class ManageProduct extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private HoaDAO HoaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }
