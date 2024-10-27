@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author trant
  */
-@WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
-public class TestServlet extends HttpServlet {
+@WebServlet(name = "manageProduct", urlPatterns = {"/manageProduct"})
+public class manageProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,35 +32,20 @@ public class TestServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        
-        HoaDAO hoaDAO = new HoaDAO();
+         HoaDAO hoaDAO = new HoaDAO();
         LoaiDAO loaiDAO= new LoaiDAO();
-        
-         String action = "LIST";
-        if (request.getParameter("action") != null)
-        {
-            action = request.getParameter("action");
-        }
-        
-         switch (action) {
-            case "LIST":
-                request.setAttribute("dsHoa", hoaDAO.getAll());
-                request.getRequestDispatcher("admin/list_product.jsp").forward(request, response);
-                break;
-               case "ADD":
-                  request.setAttribute("dsLoai", loaiDAO.getAll());
-                request.getRequestDispatcher("admin/add_product.jsp").forward(request, response);
-                break;
-              
-                 
-            case "EDIT":
-                System.out.println("EDIT");
-                break;
-            case "DELETE":
-                System.out.println("DELETE");
-                break;
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet manageProduct</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet manageProduct at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

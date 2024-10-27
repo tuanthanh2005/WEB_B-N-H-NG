@@ -1,9 +1,11 @@
 <%-- 
     Document   : add_product
-    Created on : Oct 22, 2024, 2:11:57 PM
-    Author     : ADMIN
+    Created on : Oct 23, 2024, 7:57:34 AM
+    Author     : PC
 --%>
 
+<%@page import="model.Loai"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="../shared/header.jsp" />
@@ -30,6 +32,14 @@
             <label>Thể loại</label>
             <select name="maloai" class="form-control">      
                 <option value="" disabled="">==Chọn thể loại==</option>
+                <%
+                    ArrayList<Loai> dsLoai = (ArrayList<Loai>) request.getAttribute("dsLoai");
+                    for(Loai x : dsLoai){
+                 %>
+                 <option value="<%=x.getMaloai()%>"><%=x.getTenloai()%></option>
+                 <%
+                     }
+                 %>
             </select>
         </div>        
         <button type="submit" class="btn btn-primary">Save</button>

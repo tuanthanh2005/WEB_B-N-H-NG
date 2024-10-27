@@ -1,11 +1,12 @@
 <%-- 
     Document   : list_product
-    Created on : Oct 22, 2024, 2:11:45 PM
-    Author     : ADMIN
+    Created on : Oct 23, 2024, 7:58:51 AM
+    Author     : PC
 --%>
 
-<%@page import="java.util.ArrayList"%>
 <%@page import="model.Hoa"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="../shared/header.jsp" />
@@ -28,20 +29,20 @@
             <th>Action</th>
         </tr>  
         <%
-        ArrayList<Hoa> dsHoa = (ArrayList<Hoa>) request.getAttribute("dsHoa");
-        for(Hoa x : dsHoa)
-        {
+            DecimalFormat fmt = new DecimalFormat("#,##0");
+            ArrayList<Hoa> dsHoa = (ArrayList<Hoa>) request.getAttribute("dsHoa");
+            for(Hoa x : dsHoa){
         %>
         <tr>
-            <td><%=x.getTenhoa() %></td>
-            <td><%=x.getGia() %></td>
-            <td> <img src="assets/images/products/<%=x.getHinh()  %>" style="width: 100px">  </td>
-            <td><%=x.getMaloai()  %></td>
+            <td><%=x.getTenhoa()%></td>
+            <td><%=x.getGia()%></td>
+            <td> <img src="assets/images/products/<%=x.getHinh()%>" style="width: 100px">  </td>
+            <td><%=x.getMaloai()%></td>
             <td>
-                 <a href="ManageProduct?action=EDIT&mahoa=<%=x.getMahoa()  %>" class="btn btn-secondary"> <i class="bi bi-pencil-square"></i> Sửa</a>
-                 <a href="ManageProduct?action=DELETE&mahoa=<%=x.getMahoa()  %>" class="btn btn-danger"> <i class="bi bi-trash"></i> Xoá</a>
+                 <a href="ManagerProduct?action=EDIT&mahoa=<%=x.getMahoa()%>" class="btn btn-secondary"> <i class="bi bi-pencil-square"></i> Sửa</a>
+                 <a href="ManagerProduct?action=DELETE&mahoa=<%=x.getMahoa()%>" class="btn btn-danger"> <i class="bi bi-trash"></i> Xoá</a>
             </td>
-        </tr>         
+        </tr>    
         <%
             }
         %>
