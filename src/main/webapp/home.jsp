@@ -3,6 +3,7 @@
     Created on : Sep 15, 2023, 8:14:39 AM
     Author     : KHOACNTT
 --%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Hoa"%>
 <%@page import="dao.HoaDAO"%>
@@ -24,23 +25,24 @@
         <div class="col-sm-12">
             <div class="row">            
                 <%
+                    DecimalFormat ftm = new DecimalFormat("#,##0");
                     HoaDAO hoaDAO = new HoaDAO();
                     ArrayList<Hoa> dsHoa = hoaDAO.getTop10();
-                    for(Hoa h : dsHoa)
+                    for(Hoa x : dsHoa)
                     {
                 %>
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <%=h.getTenhoa()%>
+                            <%=x.getTenhoa()%>
                         </div>
                         <div class="card-body">
-                            <img class="card-img" src="assets/images/products/<%=h.getHinh()%>" alt="Card image cap">                         
+                            <img class="card-img" src="assets/images/products/<%=x.getHinh()%>" alt="Card image cap">                         
                         </div>
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col">
-                                    <p class="btn btn-danger btn-block"><%=h.getGia()%></p>
+                                    <p class="btn btn-danger btn-block"><%=ftm.format(x.getGia()) %></p>
                                 </div>
                                 <div class="col">
                                     <a href="#" class="btn btn-success btn-block">Add to cart</a>
