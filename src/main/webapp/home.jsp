@@ -42,7 +42,7 @@
                         <div class="card-footer">
                             <div class="row">
                                 <div class="col">
-                                    <p class="btn btn-danger btn-block"><%=ftm.format(x.getGia()) %></p>
+                                    <p class="btn btn-danger btn-block">Add to cart</p>
                                 </div>
                                 <div class="col">
                                     <a href="#" class="btn btn-success btn-block">Add to cart</a>

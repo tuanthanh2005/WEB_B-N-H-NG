@@ -12,6 +12,21 @@
 <jsp:include page="../shared/header.jsp" />
              
 <jsp:include page="../shared/nav.jsp" />
+<%
+if (request.getAttribute("success")!=null) {
+        
+    
+%>
+<script>
+Swal.fire({
+  title: "Good job!",
+  text: "<%=request.getAttribute("success") %>",
+  icon: "success"
+});
+</script>
+<%
+    }
+%>
 
 
 <div class="container">
@@ -39,8 +54,13 @@
             <td> <img src="assets/images/products/<%=x.getHinh()%>" style="width: 100px">  </td>
             <td><%=x.getMaloai()%></td>
             <td>
-                 <a href="ManagerProduct?action=EDIT&mahoa=<%=x.getMahoa()%>" class="btn btn-secondary"> <i class="bi bi-pencil-square"></i> Sửa</a>
-                 <a href="ManagerProduct?action=DELETE&mahoa=<%=x.getMahoa()%>" class="btn btn-danger"> <i class="bi bi-trash"></i> Xoá</a>
+                 <a href="TestServlet?action=EDIT&mahoa=<%=x.getMahoa()%>" class="btn btn-secondary"> <i class="bi bi-pencil-square"></i> Sửa</a>
+                 <a href="TestServlet?action=DELETE&mahoa=<%=x.getMahoa()%>" class="btn btn-danger"
+                    onclick="return confirm('Bạn Có Chắc Chắn Muốn Xóa Không ?')"
+                    
+                    > 
+                     <i class="bi bi-trash"></i> Xoá</a>
+                 
             </td>
         </tr>    
         <%
