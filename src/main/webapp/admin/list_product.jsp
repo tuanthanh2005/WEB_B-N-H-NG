@@ -10,19 +10,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="../shared/header.jsp" />
-             
+
 <jsp:include page="../shared/nav.jsp" />
 <%
-if (request.getAttribute("success")!=null) {
-        
-    
+    if (request.getAttribute("success") != null) {
+
+
 %>
 <script>
-Swal.fire({
-  title: "Good job!",
-  text: "<%=request.getAttribute("success") %>",
-  icon: "success"
-});
+    Swal.fire({
+        title: "Good job!",
+        text: "<%=request.getAttribute("success")%>",
+        icon: "success"
+    });
 </script>
 <%
     }
@@ -34,7 +34,7 @@ Swal.fire({
     <div class="mb-2 text-end">
         <a href="TestServlet?action=ADD" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Thêm mới</a>
     </div>
-    
+
     <table class="table table-bordered table-striped">
         <tr>
             <th>Tên hoa</th>
@@ -46,7 +46,7 @@ Swal.fire({
         <%
             DecimalFormat fmt = new DecimalFormat("#,##0");
             ArrayList<Hoa> dsHoa = (ArrayList<Hoa>) request.getAttribute("dsHoa");
-            for(Hoa x : dsHoa){
+            for (Hoa x : dsHoa) {
         %>
         <tr>
             <td><%=x.getTenhoa()%></td>
@@ -54,19 +54,31 @@ Swal.fire({
             <td> <img src="assets/images/products/<%=x.getHinh()%>" style="width: 100px">  </td>
             <td><%=x.getMaloai()%></td>
             <td>
-                 <a href="TestServlet?action=EDIT&mahoa=<%=x.getMahoa()%>" class="btn btn-secondary"> <i class="bi bi-pencil-square"></i> Sửa</a>
-                 <a href="TestServlet?action=DELETE&mahoa=<%=x.getMahoa()%>" class="btn btn-danger"
-                    onclick="return confirm('Bạn Có Chắc Chắn Muốn Xóa Không ?')"
-                    
-                    > 
-                     <i class="bi bi-trash"></i> Xoá</a>
-                 
+                <a href="TestServlet?action=EDIT&mahoa=<%=x.getMahoa()%>" class="btn btn-secondary"> <i class="bi bi-pencil-square"></i> Sửa</a>
+                <a href="TestServlet?action=DELETE&mahoa=<%=x.getMahoa()%>" class="btn btn-danger"
+                   onclick="return confirm('Bạn Có Chắc Chắn Muốn Xóa Không ?')"
+
+                   > 
+                    <i class="bi bi-trash"></i> Xoá</a>
+
             </td>
         </tr>    
         <%
             }
         %>
     </table>
-</div>
+    </div>
+    <ul class ="pagination justify-content-center">
+        <%
+            int sumOfPage = (int) request.getAttribute("sumOfPage");
+            int pageIndex = (int) request.getAttribute("pageIndex");
+            for (int i = 1; i <= sumOfPage; i++) {
 
-<jsp:include page="../shared/footer.jsp" />
+        %>
+        <li class="page-item <%= pageIndex==i?"active":"" %>"><a class="page-link" href="TestServlet?page=<%=i%>"><%=i%></a></li>
+            <%
+                }
+            %>
+    </ul>
+
+    <jsp:include page="../shared/footer.jsp" />
