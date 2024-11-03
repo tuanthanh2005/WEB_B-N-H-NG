@@ -80,5 +80,19 @@
                 }
             %>
     </ul>
-
+<ul class="pagination">
+  <li class="page-item <%=pageIndex==1?"disabled":"" %>">
+       <a class="page-link" href="TestServlet?page=<%=pageIndex>1 ? pageIndex-1 :pageIndex %>">Previous</a></li>
+ <%
+     for (int i = 1; i < sumOfPage ; i++) {
+             
+         
+ %>
+    <li class="page-item <%= pageIndex==i?"active":"" %>"><a class="page-link" href="TestServlet?page=<%=i%>"><%=i%></a></li>
+    <%
+        }
+    %>
+    <li class ="page-item <%=pageIndex== sumOfPage?"disabled":"" %>">
+        <a class="page-link" href="TestServlet?page=<%=pageIndex<sumOfPage? pageIndex+1 :pageIndex %>">Next</a></li>
+</ul>
     <jsp:include page="../shared/footer.jsp" />
