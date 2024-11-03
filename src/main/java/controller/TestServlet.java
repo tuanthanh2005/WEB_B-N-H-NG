@@ -99,34 +99,35 @@ public class TestServlet extends HttpServlet {
                 break;
             case "EDIT":
                 if (method.equalsIgnoreCase("get")) {
-                    // trả về giao diện cập nhật sản phẩm
                     int mahoa = Integer.parseInt(request.getParameter("mahoa"));
                     request.setAttribute("hoa", hoaDAO.getById(mahoa));
                     request.setAttribute("dsLoai", loaiDAO.getAll());
-                    request.getRequestDispatcher("admin/add_product.jsp").forward(request, response);
-
-                } else if (method.equalsIgnoreCase("post"))
-                {
-                    // xử lý cập nhật sản phẩm
+                    request.getRequestDispatcher("admin/edit_product.jsp").forward(request, response);
+                } else {
+                    //xu ly cap nhat san pham
+                    //b1 Lay thong tin san pham
                     int mahoa = Integer.parseInt(request.getParameter("mahoa"));
                     String tenhoa = request.getParameter("tenhoa");
                     double gia = Double.parseDouble(request.getParameter("gia"));
                     Part part = request.getPart("hinh");
                     int maloai = Integer.parseInt(request.getParameter("maloai"));
                     String filename = request.getParameter("oldImg");
-                    
-                    if (part.getSize()>0) {
-                        String realPath = request.getServletContext().getRealPath("/assets/images/products");
-                        filename=Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                          part.write(realPath + "/" + filename);
+
+                    //b2 Xu ly upload file
+                    if (part.getSize() > 0) {
+                        String realpath = request.getServletContext().getRealPath("/assets/images/products");
+                        filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                        part.write(realpath + "/" + filename);
                     }
-                    
-                  Hoa objUpdate = new Hoa(mahoa, tenhoa, gia, filename, maloai, new Date(new java.util.Date().getTime()));
+
+                    //3. Cap nhat san pham vao CSDL
+                    Hoa objUpdate = new Hoa(mahoa, tenhoa, gia, filename, maloai, new Date(new java.util.Date().getTime()));
                     if (hoaDAO.Update(objUpdate)) {
-                        // thông báo thêm thành công
-                        request.setAttribute("success", " thao tác thêm thành công");
+                        //thong bao them thanh cong
+                        request.setAttribute("success", "Thao tac cap nhat san pham thanh cong");
                     } else {
-                        request.setAttribute("erorr", "thao tác thêm thất bại");
+                        //thong bao them that bai
+                        request.setAttribute("error", "Thao tac cap nhat san pham that bai");
                     }
                     request.getRequestDispatcher("TestServlet?action=LIST").forward(request, response);
                 }

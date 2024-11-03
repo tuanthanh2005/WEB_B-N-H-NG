@@ -14,16 +14,15 @@
     ArrayList<Loai> dsLoai = loaiDAO.getAll();
 %>
 <div class="card mb-3">
-    <h3 class="card-header">Danh Mục Sản Phẩm</h3>  
+    <h3 class="card-header">Danh mục loại</h3>  
         <ul class="list-group list-group-flush">
-                <%
-                for(Loai loai : dsLoai)
-                {
-                %>
-                <li class="list-group-item"><a class="text-decoration-none" href="product.jsp?maloai=<%=loai.getMaloai() %>"><%=loai.getTenloai() %> </a></li>
-                
-                <%
-                    }
-                %>
+            <%
+                for(Loai loai : dsLoai){
+            %>
+            <li class="list-group-item"><a class="text-decoration-none" href="product.jsp?maloai=<%=loai.getMaloai() %>">
+                <%=loai.getTenloai() %></a></li>
+            <%
+                }
+            %>
         </ul>   
 </div>
