@@ -16,6 +16,30 @@
         <li class="nav-item">
           <a class="nav-link" href="TestServlet">Product Managementa</a> 
               </li> 
+      </ul>
+        <!--Hiển Thị welcome--->
+        <ul class="navbar-nav">
+                <%
+                    if (session.getAttribute("username") != null) {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Welcome <%=session.getAttribute("username")%> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="DangxuatServlet"> Logout </a>
+                </li>
+                <%
+                } else {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.jsp"> Login </a>
+                </li>
+                <%
+                    }
+                %>
+            </ul>
+        
     </div>
   </div>
 </nav>
+            
